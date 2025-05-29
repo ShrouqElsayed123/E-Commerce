@@ -1,12 +1,12 @@
 
 import './App.css'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
 
   return (
     <>
-        <div className="min-h-screen flex items-center justify-center bg-red-100"></div>
-
+<Navbar />
     </>
   )
 }
