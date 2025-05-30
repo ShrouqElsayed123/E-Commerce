@@ -5,7 +5,11 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        mainColor: '#4A7EA0',
+      }
+    },
   },
   plugins: [],
 }
