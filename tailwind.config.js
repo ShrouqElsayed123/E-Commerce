@@ -7,7 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        mainColor: '#4A7EA0',
+        mainColor: '#1C8057',
+        mainColorLight1: '#37916C',
+        secondaryColor:'#F8C718',
+       
+      },
+      margin:{
+         sectionMarginTop:"50px"
       }
     },
   },

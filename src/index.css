@@ -5,9 +5,16 @@
 
 .btn-filled {
   @apply bg-mainColor text-white font-bold py-2 px-4 rounded transition-all duration-200 cursor-pointer;
-    @apply hover:bg-mainColor/80
+  @apply hover:bg-mainColor/80
 }
+
 .btn-outlined {
   @apply border-mainColor border-[1px] font-bold py-2 px-4 rounded cursor-pointer;
   @apply hover:bg-mainColor hover:text-white;
+}
+
+.footer-icon {
+  @apply text-[20px] text-white cursor-pointer bg-mainColorLight1 p-2 rounded-full shadow-sm shadow-gray-600;
+
+
 }
