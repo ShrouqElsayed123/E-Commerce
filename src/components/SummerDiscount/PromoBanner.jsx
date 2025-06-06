@@ -5,6 +5,7 @@ import img2 from '../../assets/images/womenshopping2.jpeg';
 export default function PromoBanner() {
     return (
         <div className="flex justify-center items-center overflow-x-hidden px-2">
+            
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 p-6 rounded-xl shadow-md max-w-screen-lg w-full">
 
                 {/* Left Image */}

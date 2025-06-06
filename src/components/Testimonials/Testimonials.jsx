@@ -26,21 +26,21 @@ export default function Testimonials() {
     const [index, setIndex] = useState(0)
     const [activeBtn, setActiveBtn] = useState(null)
     const current = testimonials[index];
-    const handlePrev = ()=>{
-        setIndex((prev)=>(prev==0 ? testimonials.length-1 : prev-1));
+    const handlePrev = () => {
+        setIndex((prev) => (prev == 0 ? testimonials.length - 1 : prev - 1));
         setActiveBtn("prev")
     }
-    const handleNext=()=>{
-        setIndex((prev)=>(prev+1) % testimonials.length);
+    const handleNext = () => {
+        setIndex((prev) => (prev + 1) % testimonials.length);
         setActiveBtn("next")
     }
     return (
         <>
             <div className="flex justify-center items-center gap-8 max-w-2xl  mx-auto mt-sectionMarginTop ">
-                <button className={` rounded-full ${activeBtn=="prev"?"bg-gray-400"
-                :"bg-mainColor hover:bg-mainColorLight1"
-                }`} 
-                onClick={handlePrev}>
+                <button className={` rounded-full ${activeBtn == "prev" ? "bg-gray-400"
+                    : "bg-mainColor hover:bg-mainColorLight1"
+                    }`}
+                    onClick={handlePrev}>
                     <i className="fa-solid fa-arrow-left text-white p-3"></i>
 
                 </button>
@@ -55,8 +55,8 @@ export default function Testimonials() {
                                 <img
                                     key={i}
                                     src={t.image}
-                                    className={`w-12 h-12 rounded-full border-2  ${i==index ? "border-secondaryColor":"border-transparent"}`
-                                  }
+                                    className={`w-12 h-12 rounded-full border-2  ${i == index ? "border-secondaryColor" : "border-transparent"}`
+                                    }
                                     alt={`Avatar ${i}`} />
                             ))
                         }
@@ -66,10 +66,10 @@ export default function Testimonials() {
 
 
                 </div>
-                <button className={` rounded-full ${activeBtn=="next"?"bg-gray-400"
-                :"bg-mainColor hover:bg-mainColorLight1"
-                }`} 
-                onClick={handleNext}>
+                <button className={` rounded-full ${activeBtn == "next" ? "bg-gray-400"
+                    : "bg-mainColor hover:bg-mainColorLight1"
+                    }`}
+                    onClick={handleNext}>
                     <i className="fa-solid fa-arrow-right text-white p-3"></i>
                 </button>
             </div>

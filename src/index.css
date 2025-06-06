@@ -18,3 +18,7 @@
 
 
 }
+
+.features>* {
+  @apply relative after:bg-secondaryColor after:bg-opacity-65 after:w-10 after:h-10 after:rounded-full after:absolute after:bottom-0 after:left-0 after:z-[-454545]
+}

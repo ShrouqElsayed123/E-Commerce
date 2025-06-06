@@ -29,7 +29,7 @@ export default function Countdown() {
   );
 
   return (
-    <div className="flex items-center justify-center gap-6 mt-4">
+    <div className="flex items-center justify-center gap-2 md:gap-6 mt-4">
       <Box value={timeLeft.days} label="Days" />
       <span className="text-2xl font-bold">:</span>
       <Box value={timeLeft.hours} label="Hours" />
