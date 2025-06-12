@@ -75,7 +75,7 @@ export default function News() {
                 </div>
             </div>
 
-            <div className="max-w-screen-lg items-center mx-auto justify-between flex-col md:flex-row flex mt-10 features">
+            <div className="max-w-screen-lg text-center md:text-left p-4 items-center mx-auto justify-between flex-col md:flex-row flex mt-10 features">
                 <div className="w-full  flex flex-col md:flex-row gap-5 items-center ">
                     <i className="text-mainColor font-bold text-4xl fa-solid fa-truck"></i>
                     <div className="text">

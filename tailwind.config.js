@@ -9,6 +9,7 @@ export default {
       colors: {
         mainColor: '#1C8057',
         mainColorLight1: '#37916C',
+        mainColorDark1: '#166646',
         secondaryColor:'#F8C718',
        
       },
