@@ -15,7 +15,8 @@ export default {
       },
       margin:{
          sectionMarginTop:"50px"
-      }
+      },
+   
     },
   },
   plugins: [],
