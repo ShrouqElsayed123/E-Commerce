@@ -12,16 +12,21 @@ import ContactUs from './components/ContactUs/ContactUs'
 import AboutUs from './components/AboutUs/AboutUs'
 import NotFound from './components/NotFound.jsx/NotFound'
 import { Toaster } from 'react-hot-toast'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import GuestRoute from './components/GuestRoute/GuestRoute'
 
 
 
 
 function App() {
-  const router = createBrowserRouter([{
-    path: "/", element: <Layout />, children: [
+  const router = createBrowserRouter([
+    {
+    path: "/", element:(
+      <ProtectedRoute>
+         <Layout />
+      </ProtectedRoute>
+    ), children: [
       { index: true, element: <Home /> },
-      { path: 'login', element: <Login /> },
-      { path: 'signup', element: <Signup /> },
       { path: 'cart', element: <ShoppingCart /> },
       { path: 'loading', element: <Loading /> },
       { path: 'contact', element: <ContactUs /> },
@@ -29,7 +34,17 @@ function App() {
       { path: 'notfound', element: <NotFound /> },
     ]
 
-  }])
+  },
+{
+path: "/", element:(
+      <GuestRoute>
+         <Layout />
+      </GuestRoute>
+    ), children: [
+     { path: 'login', element: <Login /> },
+      { path: 'signup', element: <Signup /> },
+    ]
+}])
   return (
     <>
     <Toaster />
