@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import {  NavLink } from "react-router-dom";
+import { userContext } from "../Context/User.Context";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
+  const {token,setToken}=useContext(userContext)
   const [isOpen, setIsOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
   const [cartCount, setCartCount] = useState(3); // Example count
+  const handleLogout=()=>{
+    toast.success("You have successfully logged out ");
+  
+  setTimeout(() => {
+    setToken(null);
+  }, 1000); 
+
+  }
 
   return (
     <>
@@ -59,30 +71,69 @@ export default function Navbar() {
               {/* Nav Links */}
               <ul className="flex flex-col md:flex-row md:items-center md:space-x-6 mt-4 md:mt-0 text-sm font-medium">
                 <li>
-                  <a href="#" className="block py-2 px-3 text-mainColor font-bold md:p-0">Home</a>
+                  <NavLink to="/" className="block py-2 px-3 text-mainColor font-bold md:p-0">Home</NavLink>
                 </li>
                 <li>
-                  <a href="#" className="block py-2 px-3 text-gray-700 hover:text-mainColor dark:text-white md:p-0">About</a>
+                  <NavLink to="aboutus" className="block py-2 px-3 text-gray-700 hover:text-mainColor dark:text-white md:p-0">About Us</NavLink>
                 </li>
                 <li>
-                  <a href="#" className="block py-2 px-3 text-gray-700 hover:text-mainColor dark:text-white md:p-0">Services</a>
+                  <NavLink to="contactus" className="block py-2 px-3 text-gray-700 hover:text-mainColor dark:text-white md:p-0">Contact Us</NavLink>
                 </li>
 
-                {/* Cart Icon */}
-             <li className="relative flex items-center py-2 px-3">
-  <a href="#" className="relative text-gray-700 hover:text-mainColor dark:text-white md:p-0">
-    <i className="fa-solid fa-cart-shopping text-xl"></i>
-    {/* Cart Count Badge */}
-    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1.5 py-0.5 leading-none">
-      {cartCount}
-    </span>
-  </a>
-</li>
+               {
+                token && (
+                  <>
+                   {/* Cart Icon */}
+                <li className="relative flex items-center py-2 px-3">
+                  <NavLink to="cart" className="relative text-gray-700 hover:text-mainColor dark:text-white md:p-0">
+                    <i className="fa-solid fa-cart-shopping text-xl"></i>
+                    {/* Cart Count Badge */}
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1.5 py-0.5 leading-none">
+                      {cartCount}
+                    </span>
+                  </NavLink>
+                </li>
+                {/* Fav Icon */}
+                <li className="relative flex items-center py-2 px-3">
+                  <NavLink to="#" className="relative text-gray-700 hover:text-mainColor dark:text-white md:p-0">
+                    <i className="fa-solid fa-heart text-xl"></i>
+                    {/* Cart Count Badge */}
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1.5 py-0.5 leading-none">
+                      0
+                    </span>
+                  </NavLink>
+                </li>
+                  </>
+                )
+               }
 
 
                 {/* Login & Signup Buttons */}
-                <div className="btn-filled">login</div>
-                <div className="btn-outlined">Sign Up</div>
+               {
+                !token && (
+                   <>
+                   <div className="btn-filled">
+                  <NavLink to='login' className='text-white'>
+                    log In
+                  </NavLink>
+                </div>
+                <div className="btn-outlined">
+                  <NavLink to='signup'>
+                    Sign Up
+                  </NavLink>
+                </div>
+                   </>
+                )
+               }
+               {
+                token && (
+                   <div className="btn-filled flex justify-center items-center gap-2 " onClick={handleLogout}>
+                  <span>LogOut</span>
+                  <i className="fa-solid fa-arrow-right-from-bracket text-lg "></i>
+
+                </div>
+                )
+               }
               </ul>
             </div>
           </div>

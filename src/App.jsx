@@ -14,6 +14,8 @@ import NotFound from './components/NotFound.jsx/NotFound'
 import { Toaster } from 'react-hot-toast'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import GuestRoute from './components/GuestRoute/GuestRoute'
+import UserProvider from './components/Context/User.Context'
+import Categories from './components/Categories/Categories'
 
 
 
@@ -29,9 +31,10 @@ function App() {
       { index: true, element: <Home /> },
       { path: 'cart', element: <ShoppingCart /> },
       { path: 'loading', element: <Loading /> },
-      { path: 'contact', element: <ContactUs /> },
-      { path: 'about', element: <AboutUs /> },
+      { path: 'contactus', element: <ContactUs /> },
+      { path: 'aboutus', element: <AboutUs /> },
       { path: 'notfound', element: <NotFound /> },
+      { path: 'Categories', element: <Categories /> },
     ]
 
   },
@@ -47,8 +50,11 @@ path: "/", element:(
 }])
   return (
     <>
-    <Toaster />
+    <UserProvider> 
       <RouterProvider router={router} />
+    </UserProvider>
+    <Toaster />
+     
 
 
 

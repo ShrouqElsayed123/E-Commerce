@@ -4,44 +4,51 @@ import * as yup from 'yup'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { userContext } from '../Context/User.Context'
 export default function Login() {
-  const navigate=useNavigate()
-  const x=yup.object({
-        email:yup.string().required("This field is required").email("Incorrect formatting of the email"),
-        password:yup.string().required("This field is required").matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,'The password must contain an uppercase letter, a lowercase letter, a special symbol, and be at least 8 characters long.'),
-    
+const {setToken}=useContext(userContext)
+
+
+  const navigate = useNavigate()
+  const x = yup.object({
+    email: yup.string().required("This field is required").email("Incorrect formatting of the email"),
+    password: yup.string().required("This field is required").matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/, 'The password must contain an uppercase letter, a lowercase letter, a special symbol, and be at least 8 characters long.'),
+
   })
-  let formik=useFormik ({
-    initialValues:{
-      email:'',
-      password:''
+  let formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
     },
-    validationSchema:x,
-    onSubmit:async (values)=>{
-    const toastId=toast.loading("data sending .....");
-    try{
-const option={
-      url:'https://ecommerce.routemisr.com/api/v1/auth/signin',
-      method:"POST",
-      data:values
-    }
-    const {data}=await axios.request(option)
-    if(data.message=='success'){
-       toast.success("You Login Successfully");
-    setTimeout(()=>{navigate("/")},2000)
-    }
-    console.log(data);
-    
-    }
-    catch(e){
-console.log(e);
-      toast.error( e.response?.data?.message || e.message)
+    validationSchema: x,
+    onSubmit: async (values) => {
+      const toastId = toast.loading("data sending .....");
+      try {
+        const option = {
+          url: 'https://ecommerce.routemisr.com/api/v1/auth/signin',
+          method: "POST",
+          data: values
+        }
+        const { data } = await axios.request(option)
+        if (data.message == 'success') {
+          toast.success("You Login Successfully");
+          setTimeout(() => { navigate("/") }, 2000);
+          localStorage.setItem("token",data.token)
+          setToken(data.token)
+        }
+        
+
+      }
+      catch (e) {
+        console.log(e);
+        toast.error(e.response?.data?.message || e.message)
 
 
-    }
-    finally{
-      toast.dismiss(toastId)
-    }
+      }
+      finally {
+        toast.dismiss(toastId)
+      }
     }
   })
   return (
@@ -51,49 +58,49 @@ console.log(e);
           {/* left  */}
           <div className='p-10'>
             <div className="mb-6">
-                        <a href="#" className="flex items-baseline gap-2 mb-6 ">
-                            <i className="fa-solid fa-bag-shopping text-2xl block text-mainColor"></i>
-                            <p className="text-2xl font-bold dark:text-white">Marketo <span className=" text-mainColor text-4xl font-bold dark:text-white">.</span></p>
-                        </a>
-                        <h2 className="text-2xl font-semibold">Welcome Back!</h2>
-                    </div>
+              <a href="#" className="flex items-baseline gap-2 mb-6 ">
+                <i className="fa-solid fa-bag-shopping text-2xl block text-mainColor"></i>
+                <p className="text-2xl font-bold dark:text-white">Marketo <span className=" text-mainColor text-4xl font-bold dark:text-white">.</span></p>
+              </a>
+              <h2 className="text-2xl font-semibold">Welcome Back!</h2>
+            </div>
 
-                    {/* //formmmmmmmmmmmmm */}
-                    <form className='space-y-4' onSubmit={formik.handleSubmit} >
-                      {/* Email */}
+            {/* //formmmmmmmmmmmmm */}
+            <form className='space-y-4' onSubmit={formik.handleSubmit} >
+              {/* Email */}
               <div className="space-y-1" >
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 ">Email</label>
                 <input
-                name='email'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                
+                  name='email'
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+
                   type="email"
                   placeholder=" email"
                   className="input"
                 />
-                {formik.errors.email && formik.touched.email ? (<div className='text-sm text-red-500'>{formik.errors.email}</div>):("")}
+                {formik.errors.email && formik.touched.email ? (<div className='text-sm text-red-500'>{formik.errors.email}</div>) : ("")}
               </div>
-          {/* passworddddddddd */}
-               <div className="space-y-1">
+              {/* passworddddddddd */}
+              <div className="space-y-1">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 ">Password</label>
                 <input
-                name='password'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-                 
+                  name='password'
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+
                   type="password"
                   placeholder="Enter password"
                   className="input"
                 />
-                {formik.errors.password && formik.touched.password ? (<div className='text-sm text-red-500'>{formik.errors.password}</div>):("")}
+                {formik.errors.password && formik.touched.password ? (<div className='text-sm text-red-500'>{formik.errors.password}</div>) : ("")}
               </div>
-                     <button className='w-full btn-filled' type='submit'>LogIn</button>
-                     <p className='text-center cursor-pointer'>Do not have an account yet ? <span className='text-mainColor font-bold underline'>Sign Up</span>  </p>
-                    </form>
-            
+              <button className='w-full btn-filled' type='submit'>LogIn</button>
+              <p className='text-center cursor-pointer'>Do not have an account yet ? <span className='text-mainColor font-bold underline'>Sign Up</span>  </p>
+            </form>
+
           </div>
           {/* Right  */}
           <div className="p-10 bg-gray-100 flex flex-col relative justify-center">
