@@ -34,7 +34,7 @@ function App() {
       { path: 'contactus', element: <ContactUs /> },
       { path: 'aboutus', element: <AboutUs /> },
       { path: 'notfound', element: <NotFound /> },
-      { path: 'Categories', element: <Categories /> },
+      { path: 'categories', element: <Categories /> },
     ]
 
   },

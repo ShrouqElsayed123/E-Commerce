@@ -20,22 +20,22 @@ export default function Categories() {
         setLoading(false);
       }
     }
- async function getSubCategories() {
-      try {
-        const res = await axios.get("https://ecommerce.routemisr.com/api/v1/products?limit=100");
-       console.log(res);
+//  async function getSubCategories() {
+//       try {
+//         const res = await axios.get("https://ecommerce.routemisr.com/api/v1/products?limit=100");
+//        console.log(res);
        
-      } catch (error) {
-        console.log(error);
+//       } catch (error) {
+//         console.log(error);
       
-    }
- }
+//     }
+//  }
 
   useEffect(() => {
    
 
     getCategories();
-    getSubCategories()
+    // getSubCategories()
   }, []);
 
   const scroll = (dir) => {
