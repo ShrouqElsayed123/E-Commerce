@@ -16,6 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import GuestRoute from './components/GuestRoute/GuestRoute'
 import UserProvider from './components/Context/User.Context'
 import Categories from './components/Categories/Categories'
+import { CartProvider } from './components/CartContext/Cart.Context'
 
 
 
@@ -50,8 +51,13 @@ path: "/", element:(
 }])
   return (
     <>
-    <UserProvider> 
+  
+    <UserProvider>
+        <CartProvider>
+
       <RouterProvider router={router} />
+      
+    </CartProvider> 
     </UserProvider>
     <Toaster />
      

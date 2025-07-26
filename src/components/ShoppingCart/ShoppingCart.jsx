@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import bg from '../../assets/images/bg.avif'
 import Swal from 'sweetalert2';
+import { CartContext } from '../CartContext/Cart.Context';
+import Loading from '../Loading/Loading';
 const initialCart = [
   { id: 1, name: "Fresh Oranges", weight: "500 g", price: 11.75, quantity: 4, image: "/images/oranges.png" },
   { id: 2, name: "Red Onion", weight: "500 g", price: 8.0, quantity: 2, image: "/images/onion.png" },
@@ -8,6 +10,11 @@ const initialCart = [
   { id: 4, name: "Pomegranate", weight: "500 g", price: 7.20, quantity: 2, image: "/images/pomegranate.png" },
 ];
 export default function ShoppingCart() {
+   let {getCartProduct,cartInfo} = useContext(CartContext);
+
+  useEffect(()=>{
+    getCartProduct()
+  },[])
   const [cart, setCart] = useState(initialCart)
 
   // داله زيادة كميه عنصر 
@@ -66,6 +73,16 @@ export default function ShoppingCart() {
 
   return (
     <>
+    
+   {
+    cartInfo===null ? <Loading /> : 
+    <>
+    {
+      cartInfo.numOfCartItems == 0 ? 
+     <><p>Empty</p></>
+      
+    :
+      <>
       <div className='max-w-7xl px-4 pb-10 mx-auto'>
         {/* // header  */}
         <div className='relative h-52 flex items-center justify-center text-center mb-10'>
@@ -169,5 +186,10 @@ export default function ShoppingCart() {
 
 
     </>
+    }
+    </>
+    
+   }
+   </>
   )
 }

@@ -1,4 +1,3 @@
-import Card from "../CardDesign/CardDesign";
 import Categories from "../Categories/Categories";
 import Hero from "../Hero/Hero";
 import News from "../News/News";
@@ -11,7 +10,7 @@ export default function Home() {
     <>
       <Hero />
       <Categories />
-      <Card />
+
       <Product />
       <Testimonials />
       <PromoBanner />
