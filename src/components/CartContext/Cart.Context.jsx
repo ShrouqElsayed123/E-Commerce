@@ -17,8 +17,6 @@ export function CartProvider({ children }) {
   // Adddddddddddd 
   async function addProductToCart({ id }) {
     let toastId = toast.loading("Adding Product....⏳")
-
-
     try {
       const options = {
         url: "https://ecommerce.routemisr.com/api/v1/cart",
@@ -32,17 +30,15 @@ export function CartProvider({ children }) {
       }
       let { data } = await axios.request(options);
       if (data.status === "success") {
+        getCartProduct()
         toast.success("Product Adding Successfully...✅")
 
       }
-      // console.log(data);
 
     }
-
     catch (error) {
       toast.error("Faild ❌")
       console.log(error);
-
     }
     finally {
       toast.dismiss(toastId)
@@ -62,6 +58,7 @@ export function CartProvider({ children }) {
       }
       let { data } = await axios.request(options);
       console.log(data);
+
       setCartInfo(data)
 
     }
@@ -87,7 +84,7 @@ export function CartProvider({ children }) {
         }
       }
       const { data } = await axios.request(options)
-      console.log(data);
+
       if (data.status === "success") {
         setCartInfo(data)
         toast.success("Product Deleting Successfully...✅")
@@ -125,7 +122,7 @@ export function CartProvider({ children }) {
         }
       }
       const { data } = await axios.request(options)
-      console.log(data);
+
       if (data.message == "success") {
         toast.success("Cart Deleting Successfully...✅")
 
