@@ -70,7 +70,82 @@ export function CartProvider({ children }) {
 
     }
   }
-  return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo }}>
+
+
+
+
+  // remove specific from the poduct 
+  async function removeItem({ id }) {
+    let toastId = toast.loading("Deleting Product....⏳")
+
+    try {
+      const options = {
+        url: `https://ecommerce.routemisr.com/api/v1/cart/${id}`,
+        method: "DELETE",
+        headers: {
+          token
+        }
+      }
+      const { data } = await axios.request(options)
+      console.log(data);
+      if (data.status === "success") {
+        setCartInfo(data)
+        toast.success("Product Deleting Successfully...✅")
+
+      }
+    }
+    catch (error) {
+      toast.error("Faild ❌")
+      console.log(error);
+
+    }
+    finally {
+      toast.dismiss(toastId)
+
+    }
+
+  }
+
+
+
+
+
+
+
+  // Clear Cart 
+  async function clearCart() {
+    let toastId = toast.loading("Deleting Cart....⏳")
+
+    try {
+      const options = {
+        url: "https://ecommerce.routemisr.com/api/v1/cart",
+        method: "DELETE",
+        headers: {
+          token
+        }
+      }
+      const { data } = await axios.request(options)
+      console.log(data);
+      if (data.message == "success") {
+        toast.success("Cart Deleting Successfully...✅")
+
+        setCartInfo(null)
+      }
+
+    }
+
+    catch (error) {
+      toast.error("Faild ❌")
+      console.log(error);
+
+    }
+    finally {
+      toast.dismiss(toastId)
+
+    }
+
+  }
+  return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo, removeItem, clearCart }}>
     {children}
   </CartContext.Provider>
 

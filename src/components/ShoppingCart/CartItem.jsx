@@ -1,11 +1,19 @@
 // import { useContext, useEffect, useState } from 'react';
 
+import { useContext, useEffect } from "react"
+import { CartContext } from "../CartContext/Cart.Context"
+
 
 // eslint-disable-next-line react/prop-types
-export default function CartItem({ image, name, price, category, count }) {
+export default function CartItem({ image, name, price, category, count, id }) {
+
+  const { removeItem } = useContext(CartContext)
 
 
 
+  useEffect(() => {
+
+  }, [])
   ///////////////////////// 
 
   return (
@@ -13,7 +21,11 @@ export default function CartItem({ image, name, price, category, count }) {
       {/* other rows (content)  */}
 
       <div className='grid grid-cols-4 md:grid-cols-6 border-b items-center gap-4 p-4'>
-        <button className='text-gray-400 hover:text-red-500'>X</button>
+        <button className='text-gray-400 hover:text-red-500'
+          onClick={() => {
+            removeItem({ id: id })
+          }}
+        >X</button>
         {/* ////////////////////// */}
         <div className='flex col-span-2 items-center gap-4'>
           <img src={image} alt={name} className='w-12 h-12 object-contain' />

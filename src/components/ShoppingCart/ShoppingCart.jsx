@@ -5,7 +5,7 @@ import CartItem from './CartItem';
 import bg from '../../assets/images/bg.avif'
 
 export default function ShoppingCart() {
-  let { getCartProduct, cartInfo } = useContext(CartContext);
+  let { getCartProduct, cartInfo, clearCart } = useContext(CartContext);
 
   useEffect(() => {
     getCartProduct();
@@ -49,6 +49,7 @@ export default function ShoppingCart() {
                       <h2 className='text-2xl font-bold'>Your Cart</h2>
                       <button
                         className='text-mainColor hover:text-mainColorDark1 transition-all duration-100 underline'
+                        onClick={clearCart}
                       >Clear Shopping Cart</button>
                     </div>
 
@@ -62,7 +63,7 @@ export default function ShoppingCart() {
                     </div>
                     {
                       cartInfo.data.products.map((p) => (
-                        <CartItem key={p._id} image={p.product.imageCover} name={p.product.title} category={p.product.category.name} price={p.price} quantity={p.product.quantity} count={p.count} />
+                        <CartItem key={p._id} id={p.product._id} image={p.product.imageCover} name={p.product.title} category={p.product.category.name} price={p.price} quantity={p.product.quantity} count={p.count} />
                       ))
                     }
                   </div>
