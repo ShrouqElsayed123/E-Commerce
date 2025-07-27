@@ -61,7 +61,7 @@ export function CartProvider({ children }) {
             }
         }
         let {data}=await axios.request(options);
-        console.log(data);
+        console.log(data.data.products );
         setCartInfo(data)
         
        }
