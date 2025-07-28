@@ -10,7 +10,8 @@ export const CartContext = createContext();
 // eslint-disable-next-line react/prop-types
 export function CartProvider({ children }) {
   const { token } = useContext(userContext);
-  const [cartInfo, setCartInfo] = useState(null)
+  const [cartInfo, setCartInfo] = useState(null);
+
 
 
   // const [cartItem, setCartItem] = useState([]);
@@ -127,9 +128,9 @@ export function CartProvider({ children }) {
         toast.success("Cart Deleting Successfully...✅")
 
         setCartInfo({
-        numOfCartItems :0
+          numOfCartItems: 0
         })
-       
+
       }
 
     }
@@ -145,7 +146,40 @@ export function CartProvider({ children }) {
     }
 
   }
-  return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo, removeItem, clearCart }}>
+
+
+
+
+
+
+
+  // update product count 
+
+  async function updateProductCount({ id, count }) {
+    try {
+      let options = {
+        url: `https://ecommerce.routemisr.com/api/v1/cart/${id}`,
+        method: "PUT",
+        headers: {
+          token
+        },
+        data: {
+          count
+        }
+      }
+      let { data } = await axios.request(options)
+      console.log(data);
+      if (data.status == "success") {
+        setCartInfo(data)
+      }
+    }
+
+    catch (error) {
+      console.log(error);
+
+    }
+  }
+  return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo, removeItem, clearCart, updateProductCount }}>
     {children}
   </CartContext.Provider>
 
