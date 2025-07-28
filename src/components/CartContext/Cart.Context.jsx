@@ -126,7 +126,10 @@ export function CartProvider({ children }) {
       if (data.message == "success") {
         toast.success("Cart Deleting Successfully...✅")
 
-        setCartInfo(null)
+        setCartInfo({
+        numOfCartItems :0
+        })
+       
       }
 
     }
