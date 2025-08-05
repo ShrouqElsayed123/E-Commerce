@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { userContext } from "../Context/User.Context";
 import toast from "react-hot-toast";
@@ -8,7 +8,7 @@ export default function Navbar() {
   const { token, setToken } = useContext(userContext)
   const [isOpen, setIsOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
-  const { cartInfo } = useContext(CartContext)
+  const { cartInfo, getCartProduct } = useContext(CartContext)
   const handleLogout = () => {
     toast.success("You have successfully logged out ");
 
@@ -17,7 +17,9 @@ export default function Navbar() {
     }, 1000);
 
   }
-
+  useEffect(() => {
+    getCartProduct()
+  }, [])
   return (
     <>
       <div className="w-full border-b">
@@ -93,7 +95,17 @@ export default function Navbar() {
                           <i className="fa-solid fa-cart-shopping text-xl"></i>
                           {/* Cart Count Badge */}
                           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1.5 py-0.5 leading-none">
+
                              {cartInfo?.numOfCartItems || 0}  
+
+                            {
+                              cartInfo == null ? (
+                                <i className="fa-solid fa-spinner fa-spin"></i>
+                              ) : (
+                                cartInfo.numOfCartItems
+                              )
+                            }
+
 
                           </span>
                         </NavLink>

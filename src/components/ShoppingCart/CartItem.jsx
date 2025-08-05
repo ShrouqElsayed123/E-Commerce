@@ -7,7 +7,9 @@ import { CartContext } from "../CartContext/Cart.Context"
 // eslint-disable-next-line react/prop-types
 export default function CartItem({ image, name, price, category, count, id }) {
 
-  const { removeItem,updateProductCount } = useContext(CartContext)
+  const { removeItem, updateProductCount } = useContext(CartContext)
+
+  const { removeItem, updateProductCount } = useContext(CartContext)
 
 
 
@@ -37,21 +39,36 @@ export default function CartItem({ image, name, price, category, count, id }) {
         <div className=' md:block'>{price}</div>
         {/* ////////////////////// */}
         <div className='flex items-center  gap-2'>
-          <button 
-          onClick={
-            ()=>{
-              updateProductCount({id:id,count:count-=1 })
+          <button
+            onClick={
+              () => {
+                updateProductCount({ id: id, count: count -= 1 })
+              }
             }
-          }
-          className='bg-gray-200 px-2 rounded-sm' >-</button>
+            className='bg-gray-200 px-2 rounded-sm' >-</button>
           <p>{count}</p>
           <button
-          onClick={
-            ()=>{
-              updateProductCount({id:id,count:count+1 })
+            onClick={
+              () => {
+                updateProductCount({ id: id, count: count + 1 })
+              }
             }
-          }
-          className='bg-gray-200 px-2 rounded-sm'>+</button>
+            className='bg-gray-200 px-2 rounded-sm'>+</button>
+
+          <button className='bg-gray-200 px-2 rounded-sm'
+            onClick={
+              () => {
+                updateProductCount({ id: id, count: count - 1 })
+              }
+            } >-</button>
+          <p>{count}</p>
+          <button className='bg-gray-200 px-2 rounded-sm'
+            onClick={
+              () => {
+                updateProductCount({ id: id, count: count + 1 })
+              }
+            } >+</button>
+
 
         </div>
         {/* ////////////////////// */}
