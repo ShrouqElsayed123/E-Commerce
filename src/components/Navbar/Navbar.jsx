@@ -96,8 +96,6 @@ export default function Navbar() {
                           {/* Cart Count Badge */}
                           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1.5 py-0.5 leading-none">
 
-                             {cartInfo?.numOfCartItems || 0}  
-
                             {
                               cartInfo == null ? (
                                 <i className="fa-solid fa-spinner fa-spin"></i>
