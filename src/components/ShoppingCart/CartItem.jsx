@@ -7,12 +7,11 @@ import { CartContext } from "../CartContext/Cart.Context"
 // eslint-disable-next-line react/prop-types
 export default function CartItem({ image, name, price, category, count, id }) {
 
-  const { removeItem } = useContext(CartContext)
+  const { removeItem,updateProductCount } = useContext(CartContext)
 
 
 
   useEffect(() => {
-
   }, [])
   ///////////////////////// 
 
@@ -38,9 +37,21 @@ export default function CartItem({ image, name, price, category, count, id }) {
         <div className=' md:block'>{price}</div>
         {/* ////////////////////// */}
         <div className='flex items-center  gap-2'>
-          <button className='bg-gray-200 px-2 rounded-sm' >-</button>
+          <button 
+          onClick={
+            ()=>{
+              updateProductCount({id:id,count:count-=1 })
+            }
+          }
+          className='bg-gray-200 px-2 rounded-sm' >-</button>
           <p>{count}</p>
-          <button className='bg-gray-200 px-2 rounded-sm'>+</button>
+          <button
+          onClick={
+            ()=>{
+              updateProductCount({id:id,count:count+1 })
+            }
+          }
+          className='bg-gray-200 px-2 rounded-sm'>+</button>
 
         </div>
         {/* ////////////////////// */}

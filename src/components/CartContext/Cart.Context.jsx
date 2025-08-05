@@ -57,7 +57,6 @@ export function CartProvider({ children }) {
         }
       }
       let { data } = await axios.request(options);
-      console.log(data);
 
       setCartInfo(data)
 
@@ -145,7 +144,34 @@ export function CartProvider({ children }) {
     }
 
   }
-  return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo, removeItem, clearCart }}>
+
+
+  // update product count 
+  async function updateProductCount({id,count}){
+  try{
+  const options={
+    method:"PUT",
+    url:`https://ecommerce.routemisr.com/api/v1/cart/${id}`,
+    headers:{
+      token
+    },
+    data:{
+      count
+    }
+
+  }
+  const {data}=await axios.request(options);
+  if(data.status=="success"){
+setCartInfo(data)
+  }
+  
+  }
+  catch(error){
+    console.log(error);
+    
+  }
+  }
+  return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo, removeItem, clearCart,updateProductCount }}>
     {children}
   </CartContext.Provider>
 
