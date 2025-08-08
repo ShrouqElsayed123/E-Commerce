@@ -17,6 +17,7 @@ import GuestRoute from './components/GuestRoute/GuestRoute'
 import UserProvider from './components/Context/User.Context'
 import Categories from './components/Categories/Categories'
 import { CartProvider } from './components/CartContext/Cart.Context'
+import ProductDetails from './components/ProductDetails/ProductDetails'
 
 
 
@@ -24,43 +25,44 @@ import { CartProvider } from './components/CartContext/Cart.Context'
 function App() {
   const router = createBrowserRouter([
     {
-    path: "/", element:(
-      <ProtectedRoute>
-         <Layout />
-      </ProtectedRoute>
-    ), children: [
-      { index: true, element: <Home /> },
-      { path: 'cart', element: <ShoppingCart /> },
-      { path: 'loading', element: <Loading /> },
-      { path: 'contactus', element: <ContactUs /> },
-      { path: 'aboutus', element: <AboutUs /> },
-      { path: 'notfound', element: <NotFound /> },
-      { path: 'categories', element: <Categories /> },
-    ]
+      path: "/", element: (
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      ), children: [
+        { index: true, element: <Home /> },
+        { path: 'cart', element: <ShoppingCart /> },
+        { path: 'loading', element: <Loading /> },
+        { path: 'contactus', element: <ContactUs /> },
+        { path: 'aboutus', element: <AboutUs /> },
+        { path: 'notfound', element: <NotFound /> },
+        { path: 'categories', element: <Categories /> },
+        { path: 'productdetails', element: <ProductDetails /> },
+      ]
 
-  },
-{
-path: "/", element:(
-      <GuestRoute>
-         <Layout />
-      </GuestRoute>
-    ), children: [
-     { path: 'login', element: <Login /> },
-      { path: 'signup', element: <Signup /> },
-    ]
-}])
+    },
+    {
+      path: "/", element: (
+        <GuestRoute>
+          <Layout />
+        </GuestRoute>
+      ), children: [
+        { path: 'login', element: <Login /> },
+        { path: 'signup', element: <Signup /> },
+      ]
+    }])
   return (
     <>
-  
-    <UserProvider>
+
+      <UserProvider>
         <CartProvider>
 
-      <RouterProvider router={router} />
-      
-    </CartProvider> 
-    </UserProvider>
-    <Toaster />
-     
+          <RouterProvider router={router} />
+
+        </CartProvider>
+      </UserProvider>
+      <Toaster />
+
 
 
 

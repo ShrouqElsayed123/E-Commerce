@@ -59,6 +59,7 @@ export function CartProvider({ children }) {
       let { data } = await axios.request(options);
 
       setCartInfo(data)
+console.log(data);
 
     }
     catch (error) {
@@ -171,6 +172,12 @@ setCartInfo(data)
     
   }
   }
+
+
+
+
+
+
   return <CartContext.Provider value={{ addProductToCart, getCartProduct, cartInfo, removeItem, clearCart,updateProductCount }}>
     {children}
   </CartContext.Provider>
