@@ -3,6 +3,7 @@ import { CartContext } from '../CartContext/Cart.Context';
 import Loading from '../Loading/Loading';
 import CartItem from './CartItem';
 import bg from '../../assets/images/bg.avif'
+import EmptyCart from '../EmptyCart/EmptyCart';
 
 export default function ShoppingCart() {
   let { getCartProduct, cartInfo, clearCart } = useContext(CartContext);
@@ -18,7 +19,7 @@ export default function ShoppingCart() {
       ) : (
         <>
           {cartInfo.numOfCartItems === 0 ? (
-            <p>Empty</p>
+            <EmptyCart />
           ) :
             (
               <div className='max-w-7xl px-4 pb-10 mx-auto'>
