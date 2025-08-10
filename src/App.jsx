@@ -18,6 +18,7 @@ import UserProvider from './components/Context/User.Context'
 import Categories from './components/Categories/Categories'
 import { CartProvider } from './components/CartContext/Cart.Context'
 import ProductDetails from './components/ProductDetails/ProductDetails'
+import CheckOut from './components/CheckOut/CheckOut'
 
 
 
@@ -37,7 +38,8 @@ function App() {
         { path: 'aboutus', element: <AboutUs /> },
         { path: 'notfound', element: <NotFound /> },
         { path: 'categories', element: <Categories /> },
-        { path: 'productdetails', element: <ProductDetails /> },
+        { path: 'productdetails/:id', element: <ProductDetails /> },
+        { path: 'checkout', element: <CheckOut /> },
       ]
 
     },

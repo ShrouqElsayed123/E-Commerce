@@ -22,7 +22,7 @@ export default function Card({ src, id, price, title, ratingsAverage, category, 
           className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-          <NavLink to="productdetails" className="text-2xl text-white">
+          <NavLink to={`productdetails/${id}`} className="text-2xl text-white">
             <i className="fa-regular fa-eye"></i>
           </NavLink>
         </div>

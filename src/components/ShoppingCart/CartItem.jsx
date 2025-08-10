@@ -2,6 +2,7 @@
 
 import { useContext, useEffect } from "react"
 import { CartContext } from "../CartContext/Cart.Context"
+import { NavLink } from "react-router-dom"
 
 
 // eslint-disable-next-line react/prop-types
@@ -30,7 +31,9 @@ export default function CartItem({ image, name, price, category, count, id }) {
         <div className='flex col-span-2 items-center gap-4'>
           <img src={image} alt={name} className='w-12 h-12 object-contain' />
           <div>
-            <p className="text-[14px] truncate w-28">{name}</p>
+            <p className="text-[14px] truncate w-28">
+              <NavLink to={`/productdetails/${id}`}
+              >{name}</NavLink>            </p>
             <p className='text-gray-400'>{category}</p>
           </div>
         </div>
@@ -38,7 +41,7 @@ export default function CartItem({ image, name, price, category, count, id }) {
         <div className=' md:block'>{price}</div>
         {/* ////////////////////// */}
         <div className='flex items-center  gap-2'>
-     
+
 
           <button className='bg-gray-200 px-2 rounded-sm'
             onClick={
