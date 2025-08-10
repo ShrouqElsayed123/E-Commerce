@@ -4,7 +4,7 @@
 
 
 .btn-filled {
-  @apply bg-mainColor text-white font-bold py-2 px-4 rounded transition-all duration-200 cursor-pointer;
+  @apply bg-mainColor text-white border-[1px] border-mainColor font-bold py-2 px-4 rounded transition-all duration-200 cursor-pointer;
   @apply hover:bg-mainColor/80
 }
 
@@ -23,7 +23,6 @@
   @apply relative after:bg-secondaryColor after:bg-opacity-65 after:w-10 after:h-0 after:rounded-full after:absolute after:bottom-0 after:left-0 after:z-[-454545] lg:after:h-10
 }
 
-.input{
-  @apply border px-4 py-2   w-full rounded-sm focus:outline-none focus:ring-1 focus:ring-[#1c8057a6]
+.input {
+  @apply border px-4 py-2 w-full rounded-sm focus:outline-none focus:ring-1 focus:ring-[#1c8057a6]
 }
-
