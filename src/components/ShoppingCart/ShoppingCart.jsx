@@ -4,6 +4,7 @@ import Loading from '../Loading/Loading';
 import CartItem from './CartItem';
 import bg from '../../assets/images/bg.avif'
 import EmptyCart from '../EmptyCart/EmptyCart';
+import { NavLink } from 'react-router-dom';
 
 export default function ShoppingCart() {
   let { getCartProduct, cartInfo, clearCart } = useContext(CartContext);
@@ -74,7 +75,7 @@ export default function ShoppingCart() {
 
 
                   {/* Order Summary */}
-                  <div className='bg-white border rounded-lg h-fit shadow-sm p-6'>
+                  <div className='bg-white border rounded-lg h-fit shadow-sm p-6  '>
                     <h1 className='text-xl font-bold mb-4'>Order Summary</h1>
                     <div className='space-y-5 text-gray-600'>
                       <div className='flex justify-between'>
@@ -95,8 +96,10 @@ export default function ShoppingCart() {
                         <p>{(cartInfo.data.totalCartPrice) - 50}</p>
                       </div>
                     </div>
+                    <div className='w-full flex items-center justify-center '>
+                      <NavLink to="/checkout" className='btn-filled w-fit text-center mt-6  '>Proceed To CheckOut</NavLink>
 
-                    <button className='btn-filled w-full mt-6'>Proceed To CheckOut</button>
+                    </div>
                   </div>
 
                 </div>

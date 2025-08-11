@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import bg from '../../assets/images/bg.avif'
 import { CartContext } from '../CartContext/Cart.Context';
 import Loading from '../Loading/Loading';
@@ -6,43 +6,79 @@ import EmptyCart from '../EmptyCart/EmptyCart';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { userContext } from '../Context/User.Context';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export default function CheckOut() {
     const { token } = useContext(userContext);
     const { cartInfo } = useContext(CartContext);
+    const navigate = useNavigate();
+    const [paymentMethod, setPaymentMethod] = useState(null)
     //    get cash order 
 
     async function getCashOrder(values) {
-
+        let toastId = toast.loading('We are creating your order .....')
 
         try {
             const options = {
-                method: "POST",
                 url: `https://ecommerce.routemisr.com/api/v1/orders/${cartInfo.cartId}`,
-                header: {
+                method: "POST",
+                headers: {
                     token
                 },
                 data: values
             }
             const { data } = await axios.request(options);
             console.log(data);
+            if (data.status === "success") {
+                toast.success("Your order has been created ")
+                setTimeout(() => {
+                    navigate("/allorders")
+                }, 2000)
+            }
         }
         catch (error) {
             console.log(error);
 
         }
+        finally {
+            toast.dismiss(toastId)
+        }
 
     }
+    //    get online payment 
 
+    async function getOnlinePayment(values) {
+        let toastId = toast.loading('transferring you to stripe .....')
 
+        try {
+            const options = {
+                url: `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartInfo.cartId}?url=${location.origin}`,
+                method: "POST",
+                headers: {
+                    token
+                },
+                data: values
+            }
+            const { data } = await axios.request(options);
+            console.log(data);
+            if (data.status === "success") {
+                toast.success("transferred successfully . ")
 
+                setTimeout(() => {
+                    location.href = data.session.url
+                }, 2000)
+            }
+        }
+        catch (error) {
+            console.log(error);
 
+        }
+        finally {
+            toast.dismiss(toastId)
+        }
 
-
-
-
-
-
+    }
 
 
 
@@ -55,6 +91,14 @@ export default function CheckOut() {
                 "details": "",
                 "phone": "",
                 "city": ""
+            }
+        },
+        onSubmit: (values) => {
+            if (paymentMethod == 'cash') {
+                getCashOrder(values)
+            }
+            else {
+                getOnlinePayment(values)
             }
         }
     })
@@ -114,8 +158,20 @@ export default function CheckOut() {
                                                 </div>
 
                                                 <div className='space-x-2 mt-4 w-full'>
-                                                    <button className='btn-filled'>Cash Order</button>
-                                                    <button className='btn-outlined'>Online Payment</button>
+                                                    <button
+                                                        onClick={
+                                                            () => {
+                                                                setPaymentMethod('cash')
+                                                            }
+                                                        }
+                                                        type='submit' className='btn-filled'>Cash Order</button>
+                                                    <button
+                                                        onClick={
+                                                            () => {
+                                                                setPaymentMethod('online')
+                                                            }
+                                                        }
+                                                        type='submit' className='btn-outlined'>Online Payment</button>
                                                 </div>
                                             </form>
                                         </div>
